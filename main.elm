@@ -10,9 +10,6 @@ import Element.Font as Font
 main =
     Element.layout
         [ Background.color white
-        , Font.color black
-        , Font.italic
-        , Font.size 32
         , Font.family
             [ Font.external
                 { url = "https://fonts.googleapis.com/css?family=EB+Garamond"
@@ -22,11 +19,11 @@ main =
             ]
         ]
     <|
-        row [ width (fill), height (fill) ]
+        row [ width (fill) ]
             [ el
-                [ width (fillPortion 1), height (fill) ]
+                [ width (fillPortion 1) ]
                 (none)
-            , column [ width (fillPortion 3), height (fill), Font.center ]
+            , column [ width (fillPortion 3) ]
                 [ row
                     [ Font.color (Color.rgb 5 5 5)
                     , Font.size 13
@@ -39,16 +36,16 @@ main =
                     , spacing 25
                     , paddingEach { bottom = 20, left = 0, right = 0, top = 20 }
                     ]
-                    [ column [ width (fillPortion 2), height (fill) ]
+                    [ column [ width (fillPortion 2) ]
                         [ row [ spacing 15 ]
                             [ el [] (text "(706) 204-9682")
                             , el [] (text "Winesilove@americancraftspirits.com")
                             , el [] (text "Logout")
                             ]
                         ]
-                    , column [ width (fillPortion 2), height (fill) ]
+                    , column [ width (fillPortion 2) ]
                         []
-                    , column [ width (fillPortion 1), height (fill) ]
+                    , column [ width (fillPortion 1) ]
                         [ row
                             [ spacing 5
                             , Font.alignRight
@@ -89,13 +86,13 @@ main =
                     ]
                 , Home.home
                 , row [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 } ]
-                    [ column [ width (fillPortion 1), height (fill) ]
+                    [ column [ width (fillPortion 1) ]
                         [ el [ alignLeft ] (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg", description = "" })
                         ]
-                    , column [ width (fillPortion 1), height (fill) ]
+                    , column [ width (fillPortion 1) ]
                         [ el [ centerX ] (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b2.jpg", description = "" })
                         ]
-                    , column [ width (fillPortion 1), height (fill) ]
+                    , column [ width (fillPortion 1) ]
                         [ el [ alignRight ] (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b3.jpg", description = "" })
                         ]
                     ]
@@ -108,21 +105,21 @@ main =
                         , Font.typeface "sans-serif"
                         ]
                     ]
-                    [ textColumn [ width (fillPortion 2), height (fill) ]
-                        [ paragraph [] [ el [ Font.color (Color.rgb 2 2 2), Font.size 16 ] (text "Thousands Of Bottles Ready To Ship Today") ]
-                        , paragraph [] [ el [ Font.size 13 ] (text "Our mission has always been to source for quality wines that promise great value. With over 300 wines from over 50 wineries, we’ve got a wide enough selection to have you drinking a different wine each day!") ]
+                    [ column [ width (fillPortion 2), paddingEach { top = 0, right = 10, bottom = 0, left = 0 } ]
+                        [ paragraph [ width (shrink) ] [ el [ Font.color (Color.rgb 2 2 2), Font.size 16 ] (text "Thousands Of Bottles Ready To Ship Today") ]
+                        , paragraph [ width (shrink) ] [ el [ Font.size 13 ] (text "Our mission has always been to source for quality wines that promise great value. With over 300 wines from over 50 wineries, we’ve got a wide enough selection to have you drinking a different wine each day!") ]
                         ]
-                    , textColumn [ width (fillPortion 2), height (fill) ]
-                        [ paragraph [] [ el [ Font.color (Color.rgb 2 2 2), Font.size 16 ] (text "American Craft Spirits Featured Wines") ]
-                        , paragraph [] [ el [ Font.size 13 ] (text "We provide 100% satisfactory regarding to the quality and quantity of the wine. Wine is best in taste and having elegant color. We never ever like to compromise on the quality of the wine") ]
+                    , column [ width (fillPortion 2), paddingEach { top = 0, right = 10, bottom = 0, left = 10 } ]
+                        [ paragraph [ width (shrink) ] [ el [ Font.color (Color.rgb 2 2 2), Font.size 16 ] (text "American Craft Spirits Featured Wines") ]
+                        , paragraph [ width (shrink) ] [ el [ Font.size 13 ] (text "We provide 100% satisfactory regarding to the quality and quantity of the wine. Wine is best in taste and having elegant color. We never ever like to compromise on the quality of the wine") ]
                         ]
-                    , textColumn [ width (fillPortion 2), height (fill) ]
-                        [ paragraph [] [ el [ Font.color (Color.rgb 2 2 2), Font.size 16 ] (text "Our Favorite Food And Wine Bottles") ]
-                        , paragraph [] [ el [ Font.size 13 ] (text "Your suggestions and valuable comments are very important for us. We always like to hear what are your desires with us, what are your expectations and what you want more from us.") ]
+                    , column [ width (fillPortion 2), paddingEach { top = 0, right = 0, bottom = 0, left = 10 } ]
+                        [ paragraph [ width (shrink) ] [ el [ Font.color (Color.rgb 2 2 2), Font.size 16 ] (text "Our Favorite Food And Wine Bottles") ]
+                        , paragraph [ width (shrink) ] [ el [ Font.size 13 ] (text "Your suggestions and valuable comments are very important for us. We always like to hear what are your desires with us, what are your expectations and what you want more from us.") ]
                         ]
                     ]
                 ]
             , el
-                [ width (fillPortion 1), height (fill) ]
+                [ width (fillPortion 1) ]
                 (none)
             ]

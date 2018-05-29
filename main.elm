@@ -24,18 +24,18 @@ main =
         --    ]
         ]
     <|
-        row [ width (fill) ]
-            [ el [ width (fillPortion 2) ] (none)
-            , column [ width (fillPortion 4) ]
+        row [ width fill ]
+            [ el [ width (fillPortion 1) ] none
+            , column [ width (fillPortion 3) ]
                 {-
                    Header Top Menu
 
                    -- TODO - Purchase or find a replacement for Helvetica Neue
                 -}
                 [ row [ Font.color (Color.rgb 5 5 5), Font.size 13, Font.family [ Font.typeface "Helvetica Neue", Font.typeface "Arial", Font.typeface "sans-serif" ], spacing 25, paddingEach { bottom = 20, left = 0, right = 0, top = 20 } ]
-                    [ column [ width (fillPortion 3) ] [ row [ spacing 15 ] [ el [] (text "(706) 204-9682"), el [] (text "Winesilove@americancraftspirits.com"), el [] (text "Logout") ] ]
-                    , column [ width (fillPortion 3) ] []
-                    , column [ width (fillPortion 2) ] [ row [ spacing 5, Font.alignRight ] [ el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@") ] ]
+                    [ column [ width (fillPortion 2) ] [ row [ spacing 15 ] [ el [] (text "(706) 204-9682"), el [] (text "Winesilove@americancraftspirits.com"), el [] (text "Logout") ] ]
+                    , column [ width (fillPortion 2) ] []
+                    , column [ width (fillPortion 1) ] [ row [ spacing 5, Font.alignRight ] [ el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@") ] ]
                     ]
                 , row
                     -- TODO Purchase or find a replacement for Helvetica Neue
@@ -48,7 +48,7 @@ main =
                    Was being included from Home.elm with the following code: Home.home
                 -}
                 , row [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 } ]
-                    [ el []
+                    [ el [ centerX ]
                         (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2015/11/3.jpg", description = "American Craft Spirits" })
                     ]
 
@@ -56,10 +56,10 @@ main =
                    Triple Image Boxes
 
                 -}
-                , row [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 } ]
-                    [ column [ width (fillPortion 2) ] [ el [ centerX ] (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg", description = "" }) ]
-                    , column [ width (fillPortion 2) ] [ el [ centerX ] (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b2.jpg", description = "" }) ]
-                    , column [ width (fillPortion 2) ] [ el [ centerX ] (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b3.jpg", description = "" }) ]
+                , row [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 }, spacing 40 ]
+                    [ el [ centerX ] (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg", description = "" })
+                    , el [ centerX ] (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b2.jpg", description = "" })
+                    , el [ centerX ] (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b3.jpg", description = "" })
                     ]
 
                 {-
@@ -68,22 +68,38 @@ main =
                    -- TODO - Purchase or find a replacement for Helvetica Neue
                 -}
                 , row
-                    [ paddingEach { bottom = 30, left = 10, right = 10, top = 30 }, Font.family [ Font.typeface "Helvetica Neue", Font.typeface "Arial", Font.typeface "sans-serif" ] ]
-                    [ column [ width (fillPortion 2) ]
-                        [ paragraph [ width (shrink), centerX, paddingEach { bottom = 10, left = 0, right = 0, top = 0 } ] [ el [ Font.color (Color.rgb 2 2 2), Font.size 16, Font.alignLeft ] (text "Thousands Of Bottles Ready To Ship Today") ]
-                        , paragraph [ width (shrink), centerX, paddingEach { bottom = 10, left = 0, right = 0, top = 0 } ] [ el [ Font.size 13, Font.alignLeft ] (text "Our mission has always been to source for quality wines that promise great value. With over 300 wines from over 50 wineries, we’ve got a wide enough selection to have you drinking a different wine each day!") ]
+                    [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 }
+                    , Font.family [ Font.typeface "Helvetica Neue", Font.typeface "Arial", Font.typeface "sans-serif" ]
+                    , spacing 40
+                    ]
+                    [ column [ width (px 315), centerX, paddingLeft30 ]
+                        [ paragraph [ width shrink, Font.color (Color.rgb 2 2 2), Font.size 16 ]
+                            [ text "Thousands Of Bottles Ready To Ship Today"
+                            ]
+                        , paragraph [ width shrink, Font.size 13, Font.alignLeft ]
+                            [ text "Our mission has always been to source for quality wines that promise great value. With over 300 wines from over 50 wineries, we’ve got a wide enough selection to have you drinking a different wine each day!"
+                            ]
                         ]
-                    , column [ width (fillPortion 2) ]
-                        [ paragraph [ width (shrink), centerX, paddingEach { bottom = 10, left = 0, right = 0, top = 0 } ] [ el [ Font.color (Color.rgb 2 2 2), Font.size 16, Font.alignLeft ] (text "American Craft Spirits Featured Wines") ]
-                        , paragraph [ width (shrink), centerX, paddingEach { bottom = 10, left = 0, right = 0, top = 0 } ] [ el [ Font.size 13, Font.alignLeft ] (text "We provide 100% satisfactory regarding to the quality and quantity of the wine. Wine is best in taste and having elegant color. We never ever like to compromise on the quality of the wine") ]
+                    , column [ width (px 315), centerX, paddingLeft30 ]
+                        [ paragraph [ width shrink, Font.color (Color.rgb 2 2 2), Font.size 16, Font.alignLeft ]
+                            [ text "American Craft Spirits Featured Wines" ]
+                        , paragraph [ width shrink, Font.size 13, Font.alignLeft ]
+                            [ text "We provide 100% satisfactory regarding to the quality and quantity of the wine. Wine is best in taste and having elegant color. We never ever like to compromise on the quality of the wine" ]
                         ]
-                    , column [ width (fillPortion 2) ]
-                        [ paragraph [ width (shrink), centerX, paddingEach { bottom = 10, left = 0, right = 0, top = 0 } ] [ el [ Font.color (Color.rgb 2 2 2), Font.size 16, Font.alignLeft ] (text "Our Favorite Food And Wine Bottles") ]
-                        , paragraph [ width (shrink), centerX, paddingEach { bottom = 10, left = 0, right = 0, top = 0 } ] [ el [ Font.size 13, Font.alignLeft ] (text "Your suggestions and valuable comments are very important for us. We always like to hear what are your desires with us, what are your expectations and what you want more from us.") ]
+                    , column [ width (px 315), centerX, paddingLeft30 ]
+                        [ paragraph [ width shrink, Font.color (Color.rgb 2 2 2), Font.size 16, Font.alignLeft ]
+                            [ text "Our Favorite Food And Wine Bottles" ]
+                        , paragraph [ width shrink, Font.size 13, Font.alignLeft ]
+                            [ text "Your suggestions and valuable comments are very important for us. We always like to hear what are your desires with us, what are your expectations and what you want more from us." ]
                         ]
                     ]
                 ]
             , el
-                [ width (fillPortion 2) ]
-                (none)
+                [ width (fillPortion 1) ]
+                none
             ]
+
+
+paddingLeft30 : Attribute msg
+paddingLeft30 =
+    paddingEach { bottom = 0, left = 30, right = 0, top = 0 }

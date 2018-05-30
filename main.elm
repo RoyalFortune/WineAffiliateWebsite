@@ -40,12 +40,44 @@ main =
                 [ row [ Font.color (Color.rgb 5 5 5), Font.size 13, Font.family [ Font.typeface "Helvetica Neue", Font.typeface "Arial", Font.typeface "sans-serif" ], spacing 25, paddingEach { bottom = 20, left = 0, right = 0, top = 20 } ]
                     [ column [ width (fillPortion 2) ] [ row [ spacing 15 ] [ el [] (text "(706) 204-9682"), el [] (text "Winesilove@americancraftspirits.com"), el [] (text "Logout") ] ]
                     , column [ width (fillPortion 2) ] []
-                    , column [ width (fillPortion 1) ] [ row [ spacing 5, Font.alignRight ] [ el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@"), el [ alignRight ] (text "@") ] ]
+                    , column [ width (fillPortion 1) ]
+                        [ row [ spacing 10, Font.alignRight, Font.size 18, Font.color (Color.rgb 187 187 187) ]
+                            [ el [ alignRight ] (icon "fa fa-twitter")
+                            , el [ alignRight ] (icon "fa fa-facebook")
+                            , el [ alignRight ] (icon "fa fa-google-plus")
+                            , el [ alignRight ] (icon "fa fa-pinterest")
+                            , el [ alignRight ] (icon "fa fa-instagram")
+                            , el [ alignRight ] (icon "fa fa-linkedin")
+                            , el [ alignRight ] (icon "fa fa-rss")
+                            ]
+                        ]
                     ]
                 , row
                     -- TODO Purchase or find a replacement for Helvetica Neue
-                    [ Font.color (Color.rgb 5 5 5), Font.size 13, Font.family [ Font.typeface "Helvetica Neue", Font.typeface "Arial", Font.typeface "sans-serif" ], spacing 25 ]
-                    [ el [] (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2015/08/logo.jpg", description = "American Craft Spirits" }), el [] (text "Main Home!"), el [] (text "Blog"), el [] (text "About"), el [] (text "Tasting Room"), el [] (text "Wine Store"), el [] (text "Faqs"), el [] (text "Contact"), el [] (text "@"), el [] (text "@") ]
+                    []
+                    [ el
+                        [ inFront <|
+                            row
+                                [ Font.color (Color.rgb 5 5 5)
+                                , Font.size 13
+                                , Font.family [ Font.typeface "Helvetica Neue", Font.typeface "Arial", Font.typeface "sans-serif" ]
+                                , spacing 25
+                                , moveRight 350.0
+                                , moveDown 30.0
+                                ]
+                                [ el [] (text "Main Home")
+                                , el [] (text "Blog")
+                                , el [] (text "About")
+                                , el [] (text "Tasting Room")
+                                , el [] (text "Wine Store")
+                                , el [] (text "Faqs")
+                                , el [] (text "Contact")
+                                , el [] (icon "fa fa-shopping-cart")
+                                , el [] (icon "fa fa-search")
+                                ]
+                        ]
+                        (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2015/08/logo.jpg", description = "American Craft Spirits" })
+                    ]
 
                 {-
                    Slider Image Row

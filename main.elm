@@ -12,6 +12,7 @@ import Html
 import Html.Attributes exposing (class)
 
 
+main : Html.Html String
 main =
     Element.layout
         [ Background.color white
@@ -41,10 +42,12 @@ main =
                 -}
                 [ row [ Font.color (Color.rgb 5 5 5), Font.size 13, Font.family [ Font.typeface "Helvetica Neue", Font.typeface "Arial", Font.typeface "sans-serif" ], spacing 25, paddingEach { bottom = 20, left = 0, right = 0, top = 20 } ]
                     [ column [ width (fillPortion 2) ]
-                        [ row [ spacing 15 ]
-                            [ el []
-                                (text "(706) 204-9682")
-                            , el [] (text "Winesilove@americancraftspirits.com")
+                        [ row [ spacing 5 ]
+                            [ el [ Font.color Color.black ] (icon "fa fa-phone")
+                            , el [ paddingRight15 ] (text "(706) 204-9682")
+                            , el [ Font.color Color.black ] (icon "fa fa-envelope")
+                            , el [ paddingRight15 ] (text "Winesilove@americancraftspirits.com")
+                            , el [ Font.color Color.black ] (icon "fa fa-user")
                             , el [] (text "Logout")
                             ]
                         ]
@@ -246,3 +249,8 @@ icon iconName =
 paddingBottom20 : Attribute msg
 paddingBottom20 =
     paddingEach { bottom = 20, left = 0, right = 0, top = 0 }
+
+
+paddingRight15 : Attribute msg
+paddingRight15 =
+    paddingEach { bottom = 0, left = 0, right = 15, top = 0 }

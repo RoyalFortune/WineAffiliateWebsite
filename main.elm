@@ -5,7 +5,9 @@ module Main exposing (..)
 import Color exposing (..)
 import Element exposing (..)
 import Element.Background as Background
+import Element.Border as Border
 import Element.Font as Font
+import Element.Input as Input
 import Html
 import Html.Attributes exposing (class)
 
@@ -38,7 +40,14 @@ main =
                    -- TODO - Purchase or find a replacement for Helvetica Neue
                 -}
                 [ row [ Font.color (Color.rgb 5 5 5), Font.size 13, Font.family [ Font.typeface "Helvetica Neue", Font.typeface "Arial", Font.typeface "sans-serif" ], spacing 25, paddingEach { bottom = 20, left = 0, right = 0, top = 20 } ]
-                    [ column [ width (fillPortion 2) ] [ row [ spacing 15 ] [ el [] (text "(706) 204-9682"), el [] (text "Winesilove@americancraftspirits.com"), el [] (text "Logout") ] ]
+                    [ column [ width (fillPortion 2) ]
+                        [ row [ spacing 15 ]
+                            [ el []
+                                (text "(706) 204-9682")
+                            , el [] (text "Winesilove@americancraftspirits.com")
+                            , el [] (text "Logout")
+                            ]
+                        ]
                     , column [ width (fillPortion 2) ] []
                     , column [ width (fillPortion 1) ]
                         [ row [ spacing 10, Font.alignRight, Font.size 18, Font.color (Color.rgb 187 187 187) ]
@@ -52,6 +61,12 @@ main =
                             ]
                         ]
                     ]
+
+                {-
+                   Header Main Menu
+
+                   -- TODO - Purchase or find a replacement for Helvetica Neue
+                -}
                 , row
                     -- TODO Purchase or find a replacement for Helvetica Neue
                     []
@@ -94,9 +109,12 @@ main =
 
                 -}
                 , row [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 }, spacing 40 ]
-                    [ el [ centerX ] (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg", description = "" })
-                    , el [ centerX ] (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b2.jpg", description = "" })
-                    , el [ centerX ] (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b3.jpg", description = "" })
+                    [ el [ centerX ]
+                        (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg", description = "" })
+                    , el [ centerX ]
+                        (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b2.jpg", description = "" })
+                    , el [ centerX ]
+                        (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b3.jpg", description = "" })
                     ]
 
                 {-
@@ -144,6 +162,75 @@ main =
                             ]
                         ]
                     ]
+
+                {-
+                   Contact Us Row
+
+                -}
+                , row
+                    [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 }
+                    , spacing 40
+                    , Background.color (Color.rgb 245 245 245)
+                    ]
+                    [ column [ width fill ]
+                        [ paragraph
+                            [ width fill
+                            , Font.center
+                            , Font.size 32
+                            , Font.color (Color.rgb 0 0 0)
+                            , paddingEach { bottom = 20, left = 0, right = 0, top = 20 }
+                            ]
+                            [ text "American Craft Spirits Gift Center" ]
+                        , paragraph
+                            [ width fill
+                            , Font.center
+                            , Font.size 13
+                            , paddingEach { bottom = 30, left = 0, right = 0, top = 20 }
+                            ]
+                            [ text "Love, with very young people, is a heartless business. We drink at that age from thirst, or to get drunk; it is only later in life that we occupy ourselves with the individuality of our wine." ]
+                        , el
+                            [ centerX
+                            , paddingEach { bottom = 20, left = 0, right = 0, top = 30 }
+                            ]
+                            (Input.button
+                                [ Font.color (Color.rgb 255 255 255)
+                                , Font.center
+                                , Background.color (Color.rgb 63 144 189)
+                                , paddingEach { bottom = 30, left = 10, right = 10, top = 20 }
+                                , Border.rounded 3
+                                ]
+                                { onPress = Just "ClickMsg", label = text "Contact Us" }
+                            )
+                        ]
+                    ]
+
+                {-
+                   Wine Pairing Row
+
+                -}
+                , row
+                    [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 }
+                    , spacing 40
+                    ]
+                    [ column
+                        [ width fill
+                        , Border.color (Color.rgb 237 237 237)
+                        , Border.solid
+                        , Border.widthEach { bottom = 1, left = 0, right = 0, top = 1 }
+                        ]
+                        [ paragraph
+                            [ width fill
+                            , Font.center
+                            , paddingEach { bottom = 20, left = 0, right = 0, top = 20 }
+                            , Font.bold
+                            ]
+                            [ text "American Craft Spirits monthly Food and Wine Pairing" ]
+                        , el [ centerX ]
+                            (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/glass_of_wine_flash_animation_30-40_fps_dimaaaaa.com_desd-d_desddim_nya.gif", description = "" })
+                        ]
+                    ]
+
+                -- End of Container Column
                 ]
             , el
                 [ width (fillPortion 1) ]

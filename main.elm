@@ -16,8 +16,13 @@ main : Html.Html String
 main =
     Element.layout
         [ Background.color white
+        , Font.color (Color.rgb 5 5 5)
+        , Font.size 13
         , Font.family
-            [ Font.external { url = "http://www.americancraftspirits.com/wp-content/themes/Total/css/font-awesome.min.css?ver=4.9.6", name = "fontawesome-all" }
+            [ Font.external { url = "https://fonts.googleapis.com/css?family=Open+Sans", name = "Open Sans" }
+            , Font.serif
+
+            --, Font.external { url = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css", name = "fontawesome-all" }
             ]
 
         --, Font.color black
@@ -40,7 +45,10 @@ main =
 
                    -- TODO - Purchase or find a replacement for Helvetica Neue
                 -}
-                [ row [ Font.color (Color.rgb 5 5 5), Font.size 13, Font.family [ Font.typeface "Helvetica Neue", Font.typeface "Arial", Font.typeface "sans-serif" ], spacing 25, paddingEach { bottom = 20, left = 0, right = 0, top = 20 } ]
+                [ row
+                    [ spacing 25
+                    , paddingEach { bottom = 20, left = 0, right = 0, top = 20 }
+                    ]
                     [ column [ width (fillPortion 2) ]
                         [ row [ spacing 5 ]
                             [ el [ Font.color Color.black ] (icon "fa fa-phone")
@@ -76,10 +84,7 @@ main =
                     [ el
                         [ inFront <|
                             row
-                                [ Font.color (Color.rgb 5 5 5)
-                                , Font.size 13
-                                , Font.family [ Font.typeface "Helvetica Neue", Font.typeface "Arial", Font.typeface "sans-serif" ]
-                                , spacing 25
+                                [ spacing 25
                                 , moveRight 350.0
                                 , moveDown 30.0
                                 ]
@@ -127,38 +132,37 @@ main =
                 -}
                 , row
                     [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 }
-                    , Font.family [ Font.typeface "Helvetica Neue", Font.typeface "Arial", Font.typeface "sans-serif" ]
                     , spacing 40
                     ]
-                    [ row [ width (px 315), centerX ]
+                    [ row [ width (px 315), centerX, height fill ]
                         [ column [ width (px 50), Font.color (Color.rgb 81 186 239), Font.size 28 ]
                             [ icon "fa fa-refresh"
                             ]
                         , column [ width (px 265) ]
-                            [ paragraph [ width shrink, Font.color (Color.rgb 2 2 2), Font.size 16, paddingBottom20 ]
+                            [ paragraph [ width shrink, Font.color (Color.rgb 34 34 34), Font.size 16, paddingBottom20, Font.semiBold ]
                                 [ text "Thousands Of Bottles Ready To Ship Today" ]
                             , paragraph [ width shrink, Font.size 13, Font.alignLeft ]
                                 [ text "Our mission has always been to source for quality wines that promise great value. With over 300 wines from over 50 wineries, we’ve got a wide enough selection to have you drinking a different wine each day!"
                                 ]
                             ]
                         ]
-                    , row [ width (px 315), centerX ]
+                    , row [ width (px 315), centerX, height fill ]
                         [ column [ width (px 50), Font.color (Color.rgb 81 186 239), Font.size 28 ]
                             [ icon "fa fa-paper-plane"
                             ]
                         , column [ width (px 265) ]
-                            [ paragraph [ width shrink, Font.color (Color.rgb 2 2 2), Font.size 16, Font.alignLeft, paddingBottom20 ]
+                            [ paragraph [ width shrink, Font.color (Color.rgb 34 34 34), Font.size 16, Font.alignLeft, paddingBottom20, Font.semiBold ]
                                 [ text "American Craft Spirits Featured Wines" ]
                             , paragraph [ width shrink, Font.size 13, Font.alignLeft ]
                                 [ text "We provide 100% satisfactory regarding to the quality and quantity of the wine. Wine is best in taste and having elegant color. We never ever like to compromise on the quality of the wine" ]
                             ]
                         ]
-                    , row [ width (px 315), centerX ]
+                    , row [ width (px 315), centerX, height fill ]
                         [ column [ width (px 50), Font.color (Color.rgb 81 186 239), Font.size 28 ]
                             [ icon "fa fa-bars"
                             ]
                         , column [ width (px 265) ]
-                            [ paragraph [ width shrink, Font.color (Color.rgb 2 2 2), Font.size 16, Font.alignLeft, paddingBottom20 ]
+                            [ paragraph [ width shrink, Font.color (Color.rgb 34 34 34), Font.size 16, Font.alignLeft, paddingBottom20, Font.semiBold ]
                                 [ text "Our Favorite Food And Wine Bottles" ]
                             , paragraph [ width shrink, Font.size 13, Font.alignLeft ]
                                 [ text "Your suggestions and valuable comments are very important for us. We always like to hear what are your desires with us, what are your expectations and what you want more from us." ]

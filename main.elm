@@ -220,6 +220,7 @@ main =
                         , Border.color (Color.rgb 237 237 237)
                         , Border.solid
                         , Border.widthEach { bottom = 1, left = 0, right = 0, top = 1 }
+                        , paddingEach { bottom = 30, left = 0, right = 0, top = 30 }
                         ]
                         [ paragraph
                             [ width fill
@@ -229,7 +230,55 @@ main =
                             ]
                             [ text "American Craft Spirits monthly Food and Wine Pairing" ]
                         , el [ centerX ]
-                            (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/glass_of_wine_flash_animation_30-40_fps_dimaaaaa.com_desd-d_desddim_nya.gif", description = "" })
+                            (image
+                                [ width (px 307)
+                                , height (px 230)
+                                ]
+                                { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/glass_of_wine_flash_animation_30-40_fps_dimaaaaa.com_desd-d_desddim_nya.gif", description = "" }
+                            )
+                        ]
+                    ]
+
+                {-
+                   List of wines for sale
+
+                   Going to write a function that takes a list of images, Strings, and Floats and builds this section
+                -}
+                {-
+                   Customer Testimonials
+
+                   Going to write a function that takes a list of images and Strings and rotates them. It also makes
+                   a dot for each list of image and string given that allows users to cycle through.
+                -}
+                {-
+                   Browse Shop
+
+                -}
+                , row
+                    [ spacing 40
+                    , Background.color (Color.rgb 245 245 245)
+                    ]
+                    [ column
+                        [ width fill
+                        , Border.color (Color.rgb 237 237 237)
+                        , Border.solid
+                        , Border.widthEach { bottom = 1, left = 0, right = 0, top = 1 }
+                        , paddingEach { bottom = 30, left = 0, right = 0, top = 30 }
+                        ]
+                        [ paragraph
+                            [ width fill
+                            , Font.center
+                            , paddingEach { bottom = 20, left = 20, right = 20, top = 20 }
+                            , Font.bold
+                            ]
+                            [ text "Browse Shop!!!" ]
+                        , paragraph
+                            [ width fill
+                            , Font.center
+                            , paddingEach { bottom = 20, left = 20, right = 20, top = 20 }
+                            , Font.bold
+                            ]
+                            [ text "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you" ]
                         ]
                     ]
 

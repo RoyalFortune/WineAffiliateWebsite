@@ -25,7 +25,7 @@ type alias Model =
 
 view : Model -> List (Element Msg)
 view model =
-    [ row []
+    [ row [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 } ]
         [ image [ width (px 680), height (px 514) ] { src = "http://www.americancraftspirits.com/wp-content/uploads/2015/10/simple-pleasures.jpg", description = "What Should I Expect From Fine Wine" }
         , column []
             [ Input.search []

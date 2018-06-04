@@ -59,8 +59,8 @@ view model =
         ]
     <|
         row [ width fill, alignTop ]
-            [ el [ width (fillPortion 1) ] none
-            , column [ width (fillPortion 3) ] <|
+            [ el [ width fill ] none
+            , column [ width (px 1025), centerX ] <|
                 {-
                    Header Top Menu
 
@@ -132,7 +132,7 @@ view model =
                     ++ viewPage model.page
                 )
             , el
-                [ width (fillPortion 1) ]
+                [ width fill ]
                 none
             ]
 

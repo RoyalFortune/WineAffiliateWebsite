@@ -1,7 +1,7 @@
 module Blog exposing (Model, Msg, emptyModel, init, subscriptions, update, view)
 
 import Color exposing (..)
-import CommonHtml
+import CommonHtml exposing (icon)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
@@ -27,12 +27,13 @@ view : Model -> List (Element Msg)
 view model =
     [ row [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 } ]
         [ image [ width (px 680), height (px 514) ] { src = "http://www.americancraftspirits.com/wp-content/uploads/2015/10/simple-pleasures.jpg", description = "What Should I Expect From Fine Wine" }
+        , column [ width (px 50) ] [ none ]
         , column []
-            [ Input.search []
+            [ Input.text [ onRight (el [ centerY, moveLeft 20 ] (icon "fa fa-search")) ]
                 { onChange = Just UpdateSearch
-                , text = ""
+                , text = model.searchText
                 , placeholder = CommonHtml.placeholderShowBy "search" model.searchText
-                , label = Input.labelRight [] (text "a")
+                , label = Input.labelBelow [] none
                 }
             ]
         ]

@@ -13,9 +13,9 @@ icon iconName =
 placeholderShowBy : String -> String -> Maybe (Input.Placeholder msg)
 placeholderShowBy placeholderText sourceStr =
     if sourceStr == "" then
-        Nothing
-    else
         Just (Input.placeholder [] (text placeholderText))
+    else
+        Nothing
 
 
 paddingBottom20 : Attribute msg

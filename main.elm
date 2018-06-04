@@ -45,7 +45,7 @@ main =
 
                    -- TODO - Purchase or find a replacement for Helvetica Neue
                 -}
-                [ row
+                ([ row
                     [ spacing 25
                     , paddingEach { bottom = 20, left = 0, right = 0, top = 20 }
                     ]
@@ -73,12 +73,12 @@ main =
                         ]
                     ]
 
-                {-
-                   Header Main Menu
+                 {-
+                    Header Main Menu
 
-                   -- TODO - Purchase or find a replacement for Helvetica Neue
-                -}
-                , row
+                    -- TODO - Purchase or find a replacement for Helvetica Neue
+                 -}
+                 , row
                     -- TODO Purchase or find a replacement for Helvetica Neue
                     []
                     [ el
@@ -102,21 +102,21 @@ main =
                         (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2015/08/logo.jpg", description = "American Craft Spirits" })
                     ]
 
-                {-
-                   Slider Image Row
+                 {-
+                    Slider Image Row
 
-                   Was being included from Home.elm with the following code: Home.home
-                -}
-                , row [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 } ]
+                    Was being included from Home.elm with the following code: Home.home
+                 -}
+                 , row [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 } ]
                     [ el [ centerX ]
                         (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2015/11/3.jpg", description = "American Craft Spirits" })
                     ]
 
-                {-
-                   Triple Image Boxes
+                 {-
+                    Triple Image Boxes
 
-                -}
-                , row [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 }, spacing 40 ]
+                 -}
+                 , row [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 }, spacing 40 ]
                     [ el [ centerX ]
                         (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg", description = "" })
                     , el [ centerX ]
@@ -125,12 +125,12 @@ main =
                         (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b3.jpg", description = "" })
                     ]
 
-                {-
-                   Triple Paragraph Snippets
+                 {-
+                    Triple Paragraph Snippets
 
-                   -- TODO - Purchase or find a replacement for Helvetica Neue
-                -}
-                , row
+                    -- TODO - Purchase or find a replacement for Helvetica Neue
+                 -}
+                 , row
                     [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 }
                     , spacing 40
                     ]
@@ -170,11 +170,11 @@ main =
                         ]
                     ]
 
-                {-
-                   Contact Us Row
+                 {-
+                    Contact Us Row
 
-                -}
-                , row
+                 -}
+                 , row
                     [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 }
                     , spacing 40
                     , Background.color (Color.rgb 245 245 245)
@@ -211,11 +211,11 @@ main =
                         ]
                     ]
 
-                {-
-                   Wine Pairing Row
+                 {-
+                    Wine Pairing Row
 
-                -}
-                , row
+                 -}
+                 , row
                     [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 }
                     , spacing 40
                     ]
@@ -243,114 +243,54 @@ main =
                         ]
                     ]
 
-                {-
-                   List of wines for sale
+                 {-
+                    List of wines for sale
 
-                   Going to write a function that takes a list of images, Strings, and Floats and builds this section
-                -}
-                , row [ spacing 40 ]
-                    [ column []
-                        [ el [ centerX ]
-                            (image
-                                [ width (px 307)
-                                , height (px 230)
+                    Going to write a function that takes a list of images, Strings, and Floats and builds this section
+                 -}
+                 ]
+                    ++ imageTextTextRows
+                    ++ [ {-
+                            Customer Testimonials
+
+                            Going to write a function that takes a list of images and Strings and rotates them. It also makes
+                            a dot for each list of image and string given that allows users to cycle through.
+                         -}
+                         {-
+                            Browse Shop
+
+                         -}
+                         row
+                            [ spacing 40
+                            , Background.color (Color.rgb 245 245 245)
+                            ]
+                            [ column
+                                [ width fill
+                                , Border.color (Color.rgb 237 237 237)
+                                , Border.solid
+                                , Border.widthEach { bottom = 1, left = 0, right = 0, top = 1 }
+                                , paddingEach { bottom = 30, left = 0, right = 0, top = 30 }
                                 ]
-                                { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg", description = "" }
-                            )
-                        , paragraph
-                            [ width fill
-                            , Font.center
-                            , Font.bold
-                            ]
-                            [ text "Browse Shop!!!" ]
-                        , paragraph
-                            [ width fill
-                            , Font.center
-                            ]
-                            [ text "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you" ]
-                        ]
-                    , column []
-                        [ el [ centerX ]
-                            (image
-                                [ width (px 307)
-                                , height (px 230)
+                                [ paragraph
+                                    [ width fill
+                                    , Font.center
+                                    , paddingEach { bottom = 20, left = 20, right = 20, top = 20 }
+                                    , Font.bold
+                                    ]
+                                    [ text "Browse Shop!!!" ]
+                                , paragraph
+                                    [ width fill
+                                    , Font.center
+                                    , paddingEach { bottom = 20, left = 20, right = 20, top = 20 }
+                                    , Font.bold
+                                    ]
+                                    [ text "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you" ]
                                 ]
-                                { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg", description = "" }
-                            )
-                        , paragraph
-                            [ width fill
-                            , Font.center
-                            , Font.bold
                             ]
-                            [ text "Browse Shop!!!" ]
-                        , paragraph
-                            [ width fill
-                            , Font.center
-                            ]
-                            [ text "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you" ]
-                        ]
-                    , column []
-                        [ el [ centerX ]
-                            (image
-                                [ width (px 307)
-                                , height (px 230)
-                                ]
-                                { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg", description = "" }
-                            )
-                        , paragraph
-                            [ width fill
-                            , Font.center
-                            , Font.bold
-                            ]
-                            [ text "Browse Shop!!!" ]
-                        , paragraph
-                            [ width fill
-                            , Font.center
-                            ]
-                            [ text "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you" ]
-                        ]
-                    ]
 
-                {-
-                   Customer Testimonials
-
-                   Going to write a function that takes a list of images and Strings and rotates them. It also makes
-                   a dot for each list of image and string given that allows users to cycle through.
-                -}
-                {-
-                   Browse Shop
-
-                -}
-                , row
-                    [ spacing 40
-                    , Background.color (Color.rgb 245 245 245)
-                    ]
-                    [ column
-                        [ width fill
-                        , Border.color (Color.rgb 237 237 237)
-                        , Border.solid
-                        , Border.widthEach { bottom = 1, left = 0, right = 0, top = 1 }
-                        , paddingEach { bottom = 30, left = 0, right = 0, top = 30 }
-                        ]
-                        [ paragraph
-                            [ width fill
-                            , Font.center
-                            , paddingEach { bottom = 20, left = 20, right = 20, top = 20 }
-                            , Font.bold
-                            ]
-                            [ text "Browse Shop!!!" ]
-                        , paragraph
-                            [ width fill
-                            , Font.center
-                            , paddingEach { bottom = 20, left = 20, right = 20, top = 20 }
-                            , Font.bold
-                            ]
-                            [ text "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you" ]
-                        ]
-                    ]
-
-                -- End of Container Column
-                ]
+                       -- End of Container Column
+                       ]
+                )
             , el
                 [ width (fillPortion 1) ]
                 none
@@ -379,4 +319,72 @@ type alias ImageTextTextRow =
     , textDescription : String
     }
 
-ImageTextTextRow -> 
+
+imageTextTextRows : List (Element msg)
+imageTextTextRows =
+    List.map imageTextTextRow
+        [ ( { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg"
+            , description = ""
+            , title = "Browse Shop1!!!"
+            , textDescription = "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you"
+            }
+          , { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg"
+            , description = ""
+            , title = "Browse Shop2!!!"
+            , textDescription = "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you"
+            }
+          , { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg"
+            , description = ""
+            , title = "Browse Shop3!!!"
+            , textDescription = "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you"
+            }
+          )
+        , ( { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg"
+            , description = ""
+            , title = "Browse Shop4!!!"
+            , textDescription = "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you"
+            }
+          , { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg"
+            , description = ""
+            , title = "Browse Shop5!!!"
+            , textDescription = "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you"
+            }
+          , { src = ""
+            , description = ""
+            , title = ""
+            , textDescription = ""
+            }
+          )
+        ]
+
+
+imageTextTextRow : ( ImageTextTextRow, ImageTextTextRow, ImageTextTextRow ) -> Element msg
+imageTextTextRow ( itt1, itt2, itt3 ) =
+    let
+        imageTextTextRowHelper itt =
+            column []
+                [ el [ centerX ]
+                    (image
+                        [ width (px 307)
+                        , height (px 230)
+                        ]
+                        { src = itt.src, description = itt.description }
+                    )
+                , paragraph
+                    [ width fill
+                    , Font.center
+                    , Font.bold
+                    ]
+                    [ text itt.title ]
+                , paragraph
+                    [ width fill
+                    , Font.center
+                    ]
+                    [ text itt.textDescription ]
+                ]
+    in
+    row [ spacing 40 ]
+        [ imageTextTextRowHelper itt1
+        , imageTextTextRowHelper itt2
+        , imageTextTextRowHelper itt3
+        ]

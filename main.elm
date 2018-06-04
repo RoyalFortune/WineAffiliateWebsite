@@ -43,8 +43,7 @@ view model =
         , Font.family
             [ Font.external { url = "https://fonts.googleapis.com/css?family=Open+Sans", name = "Open Sans" }
             , Font.serif
-
-            --, Font.external { url = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css", name = "fontawesome-all" }
+            , Font.external { url = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css", name = "fontawesome-all" }
             ]
 
         --, Font.color black

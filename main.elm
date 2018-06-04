@@ -248,6 +248,69 @@ main =
 
                    Going to write a function that takes a list of images, Strings, and Floats and builds this section
                 -}
+                , row [ spacing 40 ]
+                    [ column []
+                        [ el [ centerX ]
+                            (image
+                                [ width (px 307)
+                                , height (px 230)
+                                ]
+                                { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg", description = "" }
+                            )
+                        , paragraph
+                            [ width fill
+                            , Font.center
+                            , Font.bold
+                            ]
+                            [ text "Browse Shop!!!" ]
+                        , paragraph
+                            [ width fill
+                            , Font.center
+                            ]
+                            [ text "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you" ]
+                        ]
+                    , column []
+                        [ el [ centerX ]
+                            (image
+                                [ width (px 307)
+                                , height (px 230)
+                                ]
+                                { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg", description = "" }
+                            )
+                        , paragraph
+                            [ width fill
+                            , Font.center
+                            , Font.bold
+                            ]
+                            [ text "Browse Shop!!!" ]
+                        , paragraph
+                            [ width fill
+                            , Font.center
+                            ]
+                            [ text "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you" ]
+                        ]
+                    , column []
+                        [ el [ centerX ]
+                            (image
+                                [ width (px 307)
+                                , height (px 230)
+                                ]
+                                { src = "http://www.americancraftspirits.com/wp-content/uploads/2013/11/b1.jpg", description = "" }
+                            )
+                        , paragraph
+                            [ width fill
+                            , Font.center
+                            , Font.bold
+                            ]
+                            [ text "Browse Shop!!!" ]
+                        , paragraph
+                            [ width fill
+                            , Font.center
+                            ]
+                            [ text "Watch some of our great products. All of them are in their perfect size. If you have any query or suggestion, we welcome you to tell us. We love hear from you" ]
+                        ]
+                    ]
+
                 {-
                    Customer Testimonials
 
@@ -307,3 +370,13 @@ paddingBottom20 =
 paddingRight15 : Attribute msg
 paddingRight15 =
     paddingEach { bottom = 0, left = 0, right = 15, top = 0 }
+
+
+type alias ImageTextTextRow =
+    { src : String
+    , description : String
+    , title : String
+    , textDescription : String
+    }
+
+ImageTextTextRow -> 

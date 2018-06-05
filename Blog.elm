@@ -46,14 +46,20 @@ view model =
             , row [ spacing 8 ]
                 [ icon "fa fa-clock-o"
                 , el [] (text "May 24, 2018")
-                , spacer 12
+                , spacer 20
                 , icon "fa fa-user"
                 , link [] { url = ".author/sroberts/", label = text "Steven Roberts" }
-                , spacer 12
+                , spacer 20
                 , icon "fa fa-folder-o"
-                , el [] (text "Inspiration, Resources, Wine knowledge")
 
                 --, todo ...tags [list]
+                , el [] (text "Inspiration, Resources, Wine knowledge")
+
+                --, todo ...comments [count of comments]
+                -- todo, list length comments
+                , spacer 20
+                , icon "fa fa-comment-o"
+                , text "0 Comments"
                 ]
             ]
         , column [ width (px 50) ] [ none ]

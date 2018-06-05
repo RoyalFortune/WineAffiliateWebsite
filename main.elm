@@ -1,16 +1,12 @@
 module Main exposing (..)
 
---import Home
-
 import Blog exposing (Model, emptyModel, init, subscriptions, update, view)
 import Color exposing (..)
-import CommonHtml exposing (icon, paddingRight15)
+import CommonHtml exposing (desktopWidth, icon, paddingRight15)
 import Element exposing (..)
 import Element.Background as Background
-import Element.Border as Border
 import Element.Events exposing (onClick)
 import Element.Font as Font
-import Element.Input as Input
 import Home exposing (Model, emptyModel, init, subscriptions, update, view)
 import Html exposing (Html)
 
@@ -21,7 +17,7 @@ type alias Model =
 
 init : ( Model, Cmd Msg )
 init =
-    ( { page = Home Home.emptyModel }, Cmd.none )
+    ( { page = Blog Blog.emptyModel }, Cmd.none )
 
 
 subscriptions : Model -> Sub Msg
@@ -45,28 +41,12 @@ view model =
             , Font.serif
             , Font.external { url = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css", name = "fontawesome-all" }
             ]
-
-        --, Font.color black
-        --, Font.italic
-        --, Font.size 32
-        --, Font.family
-        --    [ Font.external
-        --        { url = "https://fonts.googleapis.com/css?family=EB+Garamond"
-        --        , name = "EB Garamond"
-        --        }
-        --    , Font.sansSerif
-        --    ]
         ]
     <|
         row [ width fill, alignTop ]
             [ el [ width fill ] none
-            , column [ width (px 1025), centerX ] <|
-                {-
-                   Header Top Menu
-
-                   -- TODO - Purchase or find a replacement for Helvetica Neue
-                -}
-                ([ row
+            , column [ width (px desktopWidth), centerX ]
+                [ row
                     [ spacing 25
                     , paddingEach { bottom = 20, left = 0, right = 0, top = 20 }
                     ]
@@ -93,15 +73,7 @@ view model =
                             ]
                         ]
                     ]
-
-                 {-
-                    Header Main Menu
-
-                    -- TODO - Purchase or find a replacement for Helvetica Neue
-                 -}
-                 , row
-                    -- TODO Purchase or find a replacement for Helvetica Neue
-                    []
+                , row []
                     [ el
                         [ inFront <|
                             row
@@ -122,29 +94,29 @@ view model =
                         ]
                         (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2015/08/logo.jpg", description = "American Craft Spirits" })
                     ]
-                 ]
-                    {-
-                       Slider Image Row
+                , viewPage model.page
+                ]
 
-                       Was being included from Home.elm with the following code: Home.home
-                    -}
-                    -- End of Container Column
-                    ++ viewPage model.page
-                )
+            {-
+               Slider Image Row
+
+               Was being included from Home.elm with the following code: Home.home
+            -}
+            -- End of Container Column
             , el
                 [ width fill ]
                 none
             ]
 
 
-viewPage : Page -> List (Element Msg)
+viewPage : Page -> Element Msg
 viewPage page =
     case page of
         Home subModel ->
-            List.map (Element.map HomeMsg) (Home.view subModel)
+            Element.map HomeMsg (Home.view subModel)
 
         Blog subModel ->
-            List.map (Element.map BlogMsg) (Blog.view subModel)
+            Element.map BlogMsg (Blog.view subModel)
 
 
 type Msg

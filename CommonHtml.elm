@@ -1,8 +1,13 @@
-module CommonHtml exposing (icon, paddingBottom20, paddingRight15, placeholderShowBy)
+module CommonHtml exposing (desktopWidth, icon, paddingBottom20, paddingRight15, placeholderShowBy, spacer)
 
-import Element exposing (Attribute, Element, el, htmlAttribute, none, paddingEach, text)
+import Element exposing (..)
 import Element.Input as Input
 import Html.Attributes exposing (class)
+
+
+desktopWidth : Int
+desktopWidth =
+    1025
 
 
 icon : String -> Element msg
@@ -10,10 +15,15 @@ icon iconName =
     el [ htmlAttribute (class iconName) ] none
 
 
+spacer : Int -> Element msg
+spacer amount =
+    el [ height (px amount) ] none
+
+
 placeholderShowBy : String -> String -> Maybe (Input.Placeholder msg)
 placeholderShowBy placeholderText sourceStr =
     if sourceStr == "" then
-        Just (Input.placeholder [] (text placeholderText))
+        Just (Input.placeholder [ paddingEach { bottom = 0, left = 10, top = 10, right = 0 } ] (text placeholderText))
     else
         Nothing
 

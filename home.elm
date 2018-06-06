@@ -1,7 +1,7 @@
 module Home exposing (Model, Msg, emptyModel, init, subscriptions, update, view)
 
 import Color exposing (..)
-import CommonHtml exposing (icon, paddingBottom20)
+import Common.Html exposing (icon, paddingBottom20)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Border as Border

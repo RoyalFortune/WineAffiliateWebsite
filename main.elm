@@ -2,7 +2,7 @@ module Main exposing (..)
 
 import Blog exposing (Model, emptyModel, init, subscriptions, update, view)
 import Color exposing (..)
-import CommonHtml exposing (desktopWidth, icon, paddingRight15)
+import Common.Html exposing (desktopWidth, icon, paddingRight15)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Events exposing (onClick)

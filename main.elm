@@ -9,6 +9,7 @@ import Element.Background as Background
 import Element.Events exposing (onClick)
 import Element.Font as Font
 import Home exposing (Model, emptyModel, init, subscriptions, update, view)
+import About exposing (Model, emptyModel, init, subscriptions, update, view)
 import Html exposing (Html)
 import Navigation
 
@@ -34,6 +35,7 @@ type Page
     = Home Home.Model
     | Blog Blog.Model
     | Error String
+    | About About.Model
 
 
 view : Model -> Html Msg
@@ -89,7 +91,7 @@ view model =
                                 ]
                                 [ el [ onClick (OpenPage (Home Home.emptyModel)) ] (text "Main Home")
                                 , el [ onClick (OpenPage (Blog Blog.emptyModel)) ] (text "Blog")
-                                , el [] (text "About")
+                                , el [ onClick (OpenPage (About About.emptyModel)) ] (text "About")
                                 , el [] (text "Tasting Room")
                                 , el [] (text "Wine Store")
                                 , el [] (text "Faqs")
@@ -126,6 +128,8 @@ viewPage page =
 
         Error errorStr ->
             text errorStr
+        About subModel ->
+            Element.map AboutMsg (About.view subModel)
 
 
 type Msg
@@ -133,6 +137,7 @@ type Msg
     | OpenPage Page
     | HomeMsg Home.Msg
     | BlogMsg Blog.Msg
+    | AboutMsg About.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -164,7 +169,7 @@ updatePage page msg model =
                 ( newModel, newCmd ) =
                     subUpdate subMsg subModel
             in
-            { model | page = toModel newModel } ! [ Cmd.map toMsg newCmd ]
+                { model | page = toModel newModel } ! [ Cmd.map toMsg newCmd ]
     in
     case ( msg, page ) of
         ( UrlChange location, _ ) ->
@@ -172,15 +177,21 @@ updatePage page msg model =
 
         ( BlogMsg subMsg, Blog subModel ) ->
             toPage Blog BlogMsg Blog.update subMsg subModel
+        case ( msg, page ) of
+            ( BlogMsg subMsg, Blog subModel ) ->
+                toPage Blog BlogMsg Blog.update subMsg subModel
 
-        ( HomeMsg subMsg, Home subModel ) ->
-            toPage Home HomeMsg Home.update subMsg subModel
+            ( HomeMsg subMsg, Home subModel ) ->
+                toPage Home HomeMsg Home.update subMsg subModel
 
-        ( OpenPage page, _ ) ->
-            ( { model | page = page }, Cmd.none )
+            ( AboutMsg subMsg, About subModel ) ->
+                toPage About AboutMsg About.update subMsg subModel
 
-        _ ->
-            ( model, Cmd.none )
+            ( OpenPage page, _ ) ->
+                ( { model | page = page }, Cmd.none )
+
+            _ ->
+                ( model, Cmd.none )
 
 
 

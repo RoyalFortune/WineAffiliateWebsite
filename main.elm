@@ -1,27 +1,30 @@
 module Main exposing (..)
 
+import About exposing (Model, emptyModel, init, subscriptions, update, view)
 import Blog exposing (Model, emptyModel, init, subscriptions, update, view)
 import Color exposing (..)
 import Common.Html exposing (desktopWidth, icon, paddingRight15)
-import Common.Routing as Routing exposing (Route)
+import Common.Route as Route exposing (Route)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Events exposing (onClick)
 import Element.Font as Font
 import Home exposing (Model, emptyModel, init, subscriptions, update, view)
-import About exposing (Model, emptyModel, init, subscriptions, update, view)
 import Html exposing (Html)
 import Navigation
 
 
 type alias Model =
     { page : Page
+    , location : Navigation.Location
     }
 
 
 init : Navigation.Location -> ( Model, Cmd Msg )
 init location =
-    ( { page = getPage (Routing.parse location) }
+    ( { page = getPage (Route.parse location)
+      , location = location
+      }
     , Cmd.none
     )
 
@@ -31,11 +34,29 @@ subscriptions model =
     Sub.none
 
 
+navbar : Model -> List (Element msg)
+navbar model =
+    let
+        routeLink route =
+            Route.routeLink (Route.parse model.location) route
+    in
+    [ routeLink Route.Home
+    , routeLink Route.Blog
+    , routeLink Route.About
+    , el [] (text "Tasting Room")
+    , el [] (text "Wine Store")
+    , el [] (text "Faqs")
+    , el [] (text "Contact")
+    , el [] (icon "fa fa-shopping-cart")
+    , el [] (icon "fa fa-search")
+    ]
+
+
 type Page
     = Home Home.Model
     | Blog Blog.Model
-    | Error String
     | About About.Model
+    | Error String
 
 
 view : Model -> Html Msg
@@ -89,16 +110,7 @@ view model =
                                 , moveRight 350.0
                                 , moveDown 30.0
                                 ]
-                                [ el [ onClick (OpenPage (Home Home.emptyModel)) ] (text "Main Home")
-                                , el [ onClick (OpenPage (Blog Blog.emptyModel)) ] (text "Blog")
-                                , el [ onClick (OpenPage (About About.emptyModel)) ] (text "About")
-                                , el [] (text "Tasting Room")
-                                , el [] (text "Wine Store")
-                                , el [] (text "Faqs")
-                                , el [] (text "Contact")
-                                , el [] (icon "fa fa-shopping-cart")
-                                , el [] (icon "fa fa-search")
-                                ]
+                                (navbar model)
                         ]
                         (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2015/08/logo.jpg", description = "American Craft Spirits" })
                     ]
@@ -126,15 +138,15 @@ viewPage page =
         Blog subModel ->
             Element.map BlogMsg (Blog.view subModel)
 
-        Error errorStr ->
-            text errorStr
         About subModel ->
             Element.map AboutMsg (About.view subModel)
+
+        Error errorStr ->
+            text errorStr
 
 
 type Msg
     = UrlChange Navigation.Location
-    | OpenPage Page
     | HomeMsg Home.Msg
     | BlogMsg Blog.Msg
     | AboutMsg About.Msg
@@ -148,14 +160,14 @@ update msg model =
 getPage : Maybe Route -> Page
 getPage maybeRoute =
     case maybeRoute of
-        Just Routing.Home ->
+        Just Route.Home ->
             Home Home.emptyModel
 
-        Just (Routing.BlogList maybeStr) ->
+        Just Route.Blog ->
             Blog Blog.emptyModel
 
-        Just (Routing.BlogPost int) ->
-            Error "Not implemented"
+        Just Route.About ->
+            About About.emptyModel
 
         Nothing ->
             Error "Unkown Page"
@@ -169,35 +181,31 @@ updatePage page msg model =
                 ( newModel, newCmd ) =
                     subUpdate subMsg subModel
             in
-                { model | page = toModel newModel } ! [ Cmd.map toMsg newCmd ]
+            { model | page = toModel newModel } ! [ Cmd.map toMsg newCmd ]
     in
     case ( msg, page ) of
         ( UrlChange location, _ ) ->
-            ( { model | page = getPage (Routing.parse location) }, Cmd.none )
+            ( { model
+                | page = getPage (Route.parse location)
+                , location = location
+              }
+            , Cmd.none
+            )
 
         ( BlogMsg subMsg, Blog subModel ) ->
             toPage Blog BlogMsg Blog.update subMsg subModel
-        case ( msg, page ) of
-            ( BlogMsg subMsg, Blog subModel ) ->
-                toPage Blog BlogMsg Blog.update subMsg subModel
 
-            ( HomeMsg subMsg, Home subModel ) ->
-                toPage Home HomeMsg Home.update subMsg subModel
+        ( HomeMsg subMsg, Home subModel ) ->
+            toPage Home HomeMsg Home.update subMsg subModel
 
-            ( AboutMsg subMsg, About subModel ) ->
-                toPage About AboutMsg About.update subMsg subModel
+        ( AboutMsg subMsg, About subModel ) ->
+            toPage About AboutMsg About.update subMsg subModel
 
-            ( OpenPage page, _ ) ->
-                ( { model | page = page }, Cmd.none )
-
-            _ ->
-                ( model, Cmd.none )
+        _ ->
+            ( model, Cmd.none )
 
 
-
---main : Program Never Model Msg
-
-
+main : Program Never Model Msg
 main =
     Navigation.program UrlChange
         { init = init

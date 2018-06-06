@@ -7,7 +7,7 @@ import Html.Attributes exposing (class)
 
 desktopWidth : Int
 desktopWidth =
-    1025
+    1020
 
 
 icon : String -> Element msg

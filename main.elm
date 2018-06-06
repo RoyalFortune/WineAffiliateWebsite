@@ -3,21 +3,26 @@ module Main exposing (..)
 import Blog exposing (Model, emptyModel, init, subscriptions, update, view)
 import Color exposing (..)
 import Common.Html exposing (desktopWidth, icon, paddingRight15)
+import Common.Routing as Routing exposing (Route)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Events exposing (onClick)
 import Element.Font as Font
 import Home exposing (Model, emptyModel, init, subscriptions, update, view)
 import Html exposing (Html)
+import Navigation
 
 
 type alias Model =
-    { page : Page }
+    { page : Page
+    }
 
 
-init : ( Model, Cmd Msg )
-init =
-    ( { page = Blog Blog.emptyModel }, Cmd.none )
+init : Navigation.Location -> ( Model, Cmd Msg )
+init location =
+    ( { page = getPage (Routing.parse location) }
+    , Cmd.none
+    )
 
 
 subscriptions : Model -> Sub Msg
@@ -28,6 +33,7 @@ subscriptions model =
 type Page
     = Home Home.Model
     | Blog Blog.Model
+    | Error String
 
 
 view : Model -> Html Msg
@@ -118,9 +124,13 @@ viewPage page =
         Blog subModel ->
             Element.map BlogMsg (Blog.view subModel)
 
+        Error errorStr ->
+            text errorStr
+
 
 type Msg
-    = OpenPage Page
+    = UrlChange Navigation.Location
+    | OpenPage Page
     | HomeMsg Home.Msg
     | BlogMsg Blog.Msg
 
@@ -128,6 +138,22 @@ type Msg
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     updatePage model.page msg model
+
+
+getPage : Maybe Route -> Page
+getPage maybeRoute =
+    case maybeRoute of
+        Just Routing.Home ->
+            Home Home.emptyModel
+
+        Just (Routing.BlogList maybeStr) ->
+            Blog Blog.emptyModel
+
+        Just (Routing.BlogPost int) ->
+            Error "Not implemented"
+
+        Nothing ->
+            Error "Unkown Page"
 
 
 updatePage : Page -> Msg -> Model -> ( Model, Cmd Msg )
@@ -141,6 +167,9 @@ updatePage page msg model =
             { model | page = toModel newModel } ! [ Cmd.map toMsg newCmd ]
     in
     case ( msg, page ) of
+        ( UrlChange location, _ ) ->
+            ( { model | page = getPage (Routing.parse location) }, Cmd.none )
+
         ( BlogMsg subMsg, Blog subModel ) ->
             toPage Blog BlogMsg Blog.update subMsg subModel
 
@@ -154,9 +183,12 @@ updatePage page msg model =
             ( model, Cmd.none )
 
 
-main : Program Never Model Msg
+
+--main : Program Never Model Msg
+
+
 main =
-    Html.program
+    Navigation.program UrlChange
         { init = init
         , view = view
         , update = update

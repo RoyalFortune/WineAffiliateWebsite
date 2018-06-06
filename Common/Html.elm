@@ -1,4 +1,4 @@
-module CommonHtml exposing (desktopWidth, icon, paddingBottom20, paddingRight15, placeholderShowBy, spacer)
+module Common.Html exposing (desktopWidth, icon, paddingBottom20, paddingRight15, placeholderShowBy, spacer)
 
 import Element exposing (..)
 import Element.Input as Input

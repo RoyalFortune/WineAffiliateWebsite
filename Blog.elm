@@ -1,7 +1,7 @@
 module Blog exposing (Model, Msg, emptyModel, init, subscriptions, update, view)
 
 import Color exposing (..)
-import CommonHtml exposing (desktopWidth, icon, spacer)
+import Common.Html exposing (desktopWidth, icon, spacer)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
@@ -67,7 +67,7 @@ view model =
             [ Input.text [ onRight (el [ centerY, moveLeft 20 ] (icon "fa fa-search")) ]
                 { onChange = Just UpdateSearch
                 , text = model.searchText
-                , placeholder = CommonHtml.placeholderShowBy "search" model.searchText
+                , placeholder = Common.Html.placeholderShowBy "search" model.searchText
                 , label = Input.labelBelow [] none
                 }
             , spacer 20

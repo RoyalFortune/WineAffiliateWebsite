@@ -1,7 +1,7 @@
 module About exposing (Model, Msg, emptyModel, init, subscriptions, update, view)
 
 import Color exposing (..)
-import Common.Html exposing (desktopWidth, followIconRow1, followIconRow2, icon, spacer)
+import Common.Html exposing (desktopWidth, followUsColumn, icon, spacer)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
@@ -44,26 +44,7 @@ view model =
             [ text "Who’s Behind the Heart & Soul of American Craft Spirits?"
             ]
         , column [ width (px 50) ] [ none ]
-        , column [ width (px 240), spacing 5, paddingEach { bottom = 0, left = 0, right = 0, top = 30 } ]
-            [ Input.text [ onRight (el [ centerY, moveLeft 20 ] (icon "fa fa-search")) ]
-                { onChange = Just UpdateSearch
-                , text = model.searchText
-                , placeholder = Common.Html.placeholderShowBy "search" model.searchText
-                , label = Input.labelBelow [] none
-                }
-            , spacer 20
-            , el [ Font.bold ] (text "Follow Us")
-            , spacer 20
-            , followIconRow1
-            , followIconRow2
-            , spacer 20
-            , el [ Font.bold ] (text "Paulo Coelho, Brida")
-            , spacer 20
-            , paragraph [ width shrink ]
-                [ el [ Font.color (rgb 102 102 102) ]
-                    (text "“Accept what life offers you and try to drink from every cup. All wines should be tasted; some should only be sipped, but with others, drink the whole bottle.”")
-                ]
-            ]
+        , followUsColumn model.searchText UpdateSearch
         ]
 
 

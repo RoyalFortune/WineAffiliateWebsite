@@ -1,7 +1,7 @@
 module Blog exposing (Model, Msg, emptyModel, init, subscriptions, update, view)
 
 import Color exposing (..)
-import Common.Html exposing (desktopWidth, icon, spacer)
+import Common.Html exposing (desktopWidth, followIconRow1, followIconRow2, icon, spacer)
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
@@ -25,16 +25,6 @@ type alias Model =
 
 
 --TODO: This looks like it should be an active link
-
-
-followIcon : String -> Element msg
-followIcon description =
-    let
-        imageName =
-            String.toLower description ++ ".png"
-    in
-    image [ height (px 30), width (px 30) ]
-        { src = "http://www.americancraftspirits.com/wp-content/themes/Total/images/social/" ++ imageName, description = description }
 
 
 view : Model -> Element Msg
@@ -73,24 +63,8 @@ view model =
             , spacer 20
             , el [ Font.bold ] (text "Follow Us")
             , spacer 20
-            , row [ spacing 5 ]
-                [ followIcon "Dribbble"
-                , followIcon "Facebook"
-                , followIcon "Flickr"
-                , followIcon "Forrst"
-                , followIcon "GitHub"
-                , followIcon "GooglePlus"
-                , followIcon "Instagram"
-                ]
-            , row [ spacing 5 ]
-                [ followIcon "LinkedIn"
-                , followIcon "Pinterest"
-                , followIcon "RSS"
-                , followIcon "Tumblr"
-                , followIcon "Twitter"
-                , followIcon "Vimeo"
-                , followIcon "Youtube"
-                ]
+            , followIconRow1
+            , followIconRow2
             , spacer 20
             , el [ Font.bold ] (text "Paulo Coelho, Brida")
             , spacer 20

@@ -2,13 +2,15 @@ module Common.Route
     exposing
         ( Route(..)
         , back
+        , getUrl
         , parse
         , route
         , routeLink
         )
 
 import Color
-import Element exposing (Element, link, text)
+import Element exposing (Element, el, mouseOver, padding, paddingEach, pointer, text)
+import Element.Events exposing (onClick, onMouseEnter, onMouseLeave)
 import Element.Font as Font
 import Navigation
 import UrlParser as Url exposing ((</>), (<?>), Parser, int, intParam, oneOf, parseHash, parsePath, s, stringParam, top)
@@ -29,30 +31,50 @@ route =
         ]
 
 
-routeLink : Maybe Route -> Route -> Element msg
-routeLink currentRoute route =
-    link
-        [ if currentRoute == Just route then
-            Font.color (Color.rgb 59 134 176)
-          else
-            Font.color (Color.rgb 85 85 85)
-        ]
-    <|
+routeLink : Maybe Route -> Maybe Route -> (Route -> msg) -> (Route -> msg) -> (Route -> msg) -> Route -> Element msg
+routeLink currentRoute activeRoute openPage mouseOver mouseLeave route =
+    let
+        alwaysAttributes =
+            [ if currentRoute == Just route || activeRoute == Just route then
+                Font.color (Color.rgb 59 134 176)
+              else
+                Font.color (Color.rgb 85 85 85)
+            , onClick (openPage route)
+            , onMouseEnter (mouseOver route)
+            , onMouseLeave (mouseLeave route)
+            , paddingEach { left = 5, right = 5, top = 20, bottom = 20 }
+            ]
+
+        sometimesAttributes =
+            if Just route == activeRoute then
+                [ pointer
+                ]
+            else
+                []
+    in
+    el (alwaysAttributes ++ sometimesAttributes) <|
         case route of
             Home ->
-                { url = "./"
-                , label = text "Main Home"
-                }
+                text "Main Home"
 
             Blog ->
-                { url = "./blog"
-                , label = text "Blog"
-                }
+                text "Blog"
 
             About ->
-                { url = "./about"
-                , label = text "About"
-                }
+                text "About"
+
+
+getUrl : Route -> String
+getUrl route =
+    case route of
+        Home ->
+            "./"
+
+        Blog ->
+            "./blog"
+
+        About ->
+            "./about"
 
 
 parse : Navigation.Location -> Maybe Route

@@ -7,7 +7,6 @@ import Common.Html exposing (desktopWidth, icon, paddingRight15)
 import Common.Route as Route exposing (Route)
 import Element exposing (..)
 import Element.Background as Background
-import Element.Events exposing (onClick)
 import Element.Font as Font
 import Home exposing (Model, emptyModel, init, subscriptions, update, view)
 import Html exposing (Html)
@@ -17,6 +16,7 @@ import Navigation
 type alias Model =
     { page : Page
     , location : Navigation.Location
+    , activeRoute : Maybe Route
     }
 
 
@@ -24,6 +24,7 @@ init : Navigation.Location -> ( Model, Cmd Msg )
 init location =
     ( { page = getPage (Route.parse location)
       , location = location
+      , activeRoute = Nothing
       }
     , Cmd.none
     )
@@ -34,11 +35,11 @@ subscriptions model =
     Sub.none
 
 
-navbar : Model -> List (Element msg)
+navbar : Model -> List (Element Msg)
 navbar model =
     let
         routeLink route =
-            Route.routeLink (Route.parse model.location) route
+            Route.routeLink (Route.parse model.location) model.activeRoute OpenPage MouseEnter MouseLeave route
     in
     [ routeLink Route.Home
     , routeLink Route.Blog
@@ -73,7 +74,7 @@ view model =
         ]
     <|
         row [ width fill, alignTop ]
-            [ el [ width fill ] none
+            [ column [ width fill ] [ none ]
             , column [ width (px desktopWidth), centerX ]
                 [ row
                     [ spacing 25
@@ -106,9 +107,9 @@ view model =
                     [ el
                         [ inFront <|
                             row
-                                [ spacing 25
-                                , moveRight 350.0
-                                , moveDown 30.0
+                                [ spacing 15
+                                , moveRight 340.0
+                                , moveDown 15.0
                                 ]
                                 (navbar model)
                         ]
@@ -123,9 +124,7 @@ view model =
                Was being included from Home.elm with the following code: Home.home
             -}
             -- End of Container Column
-            , el
-                [ width fill ]
-                none
+            , column [ width fill ] [ none ]
             ]
 
 
@@ -147,6 +146,9 @@ viewPage page =
 
 type Msg
     = UrlChange Navigation.Location
+    | MouseEnter Route
+    | MouseLeave Route
+    | OpenPage Route
     | HomeMsg Home.Msg
     | BlogMsg Blog.Msg
     | AboutMsg About.Msg
@@ -190,6 +192,21 @@ updatePage page msg model =
                 , location = location
               }
             , Cmd.none
+            )
+
+        ( MouseEnter route, _ ) ->
+            ( { model | activeRoute = Just route }
+            , Cmd.none
+            )
+
+        ( MouseLeave route, _ ) ->
+            ( { model | activeRoute = Nothing }
+            , Cmd.none
+            )
+
+        ( OpenPage route, _ ) ->
+            ( { model | page = getPage (Just route) }
+            , Navigation.newUrl (Route.getUrl route)
             )
 
         ( BlogMsg subMsg, Blog subModel ) ->

@@ -1,0 +1,5 @@
+{
+  "editor.tabSize": 2,
+  "git.autofetch": true,
+  "editor.codeActionsOnSaveTimeout": 75000,
+}

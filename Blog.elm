@@ -20,11 +20,8 @@ init =
 
 type alias Model =
     { searchText : String
+    , blogId : Maybe String
     }
-
-
-
---TODO: This looks like it should be an active link
 
 
 view : Model -> Element Msg
@@ -68,7 +65,8 @@ update msg model =
             ( { model | searchText = searchText }, Cmd.none )
 
 
-emptyModel : Model
-emptyModel =
+emptyModel : Maybe String -> Model
+emptyModel blogId =
     { searchText = ""
+    , blogId = blogId
     }

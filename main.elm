@@ -16,7 +16,6 @@ import Navigation
 type alias Model =
     { page : Page
     , location : Navigation.Location
-    , activeRoute : Maybe Route
     }
 
 
@@ -24,7 +23,6 @@ init : Navigation.Location -> ( Model, Cmd Msg )
 init location =
     ( { page = getPage (Route.parse location)
       , location = location
-      , activeRoute = Nothing
       }
     , Cmd.none
     )
@@ -39,10 +37,10 @@ navbar : Model -> List (Element Msg)
 navbar model =
     let
         routeLink route =
-            Route.routeLink (Route.parse model.location) model.activeRoute OpenPage MouseEnter MouseLeave route
+            Route.routeLink (Route.parse model.location) OpenPage route
     in
     [ routeLink Route.Home
-    , routeLink Route.Blog
+    , routeLink Route.BlogList
     , routeLink Route.About
     , el [] (text "Tasting Room")
     , el [] (text "Wine Store")
@@ -146,8 +144,6 @@ viewPage page =
 
 type Msg
     = UrlChange Navigation.Location
-    | MouseEnter Route
-    | MouseLeave Route
     | OpenPage Route
     | HomeMsg Home.Msg
     | BlogMsg Blog.Msg
@@ -165,8 +161,11 @@ getPage maybeRoute =
         Just Route.Home ->
             Home Home.emptyModel
 
-        Just Route.Blog ->
-            Blog Blog.emptyModel
+        Just (Route.BlogPost blogId) ->
+            Blog (Blog.emptyModel (Just blogId))
+
+        Just Route.BlogList ->
+            Blog (Blog.emptyModel Nothing)
 
         Just Route.About ->
             About About.emptyModel
@@ -191,16 +190,6 @@ updatePage page msg model =
                 | page = getPage (Route.parse location)
                 , location = location
               }
-            , Cmd.none
-            )
-
-        ( MouseEnter route, _ ) ->
-            ( { model | activeRoute = Just route }
-            , Cmd.none
-            )
-
-        ( MouseLeave route, _ ) ->
-            ( { model | activeRoute = Nothing }
             , Cmd.none
             )
 

@@ -23,10 +23,6 @@ type alias Model =
     }
 
 
-
---TODO: This looks like it should be an active link
-
-
 followIcon : String -> Element msg
 followIcon description =
     let

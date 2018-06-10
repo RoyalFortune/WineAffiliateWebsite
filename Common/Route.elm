@@ -18,8 +18,8 @@ import UrlParser as Url exposing ((</>), (<?>), Parser, int, intParam, oneOf, pa
 
 type Route
     = Home
-    | BlogList
-    | BlogPost String
+    | Blog
+    | Post String
     | About
 
 
@@ -27,10 +27,14 @@ route : Url.Parser (Route -> a) a
 route =
     Url.oneOf
         [ Url.map Home top
-        , Url.map BlogList (s "blog")
-        , Url.map BlogPost (s "blog" </> string)
+        , Url.map Blog (s "blog")
+        , Url.map Post (s "blog" </> string)
         , Url.map About (s "about")
         ]
+
+
+
+--todo, when onh a specific blog item, doesn't show blog as highlighted
 
 
 routeLink : Maybe Route -> (Route -> msg) -> Route -> Element msg
@@ -50,11 +54,11 @@ routeLink currentRoute openPage route =
             Home ->
                 text "Main Home"
 
-            BlogList ->
+            Blog ->
                 text "Blog"
 
-            BlogPost blodId ->
-                text ("Blog: " ++ blodId)
+            Post postId ->
+                Debug.crash "todo"
 
             About ->
                 text "About"
@@ -64,16 +68,16 @@ getUrl : Route -> String
 getUrl route =
     case route of
         Home ->
-            "./"
+            "/"
 
-        BlogList ->
-            "./blog"
+        Blog ->
+            "../blog"
 
-        BlogPost blogId ->
-            "./blog/" ++ blogId
+        Post postId ->
+            "../blog/" ++ postId
 
         About ->
-            "./about"
+            "../about"
 
 
 parse : Navigation.Location -> Maybe Route

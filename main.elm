@@ -5,6 +5,7 @@ import Blog exposing (Model, emptyModel, init, subscriptions, update, view)
 import Color exposing (..)
 import Common.Html exposing (desktopWidth, icon, paddingRight15)
 import Common.Route as Route exposing (Route)
+import Data.Blog
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
@@ -40,7 +41,7 @@ navbar model =
             Route.routeLink (Route.parse model.location) OpenPage route
     in
     [ routeLink Route.Home
-    , routeLink Route.BlogList
+    , routeLink Route.Blog
     , routeLink Route.About
     , el [] (text "Tasting Room")
     , el [] (text "Wine Store")
@@ -161,11 +162,18 @@ getPage maybeRoute =
         Just Route.Home ->
             Home Home.emptyModel
 
-        Just (Route.BlogPost blogId) ->
-            Blog (Blog.emptyModel (Just blogId))
+        Just Route.Blog ->
+            Blog (Blog.emptyModel Data.Blog.blogs)
 
-        Just Route.BlogList ->
-            Blog (Blog.emptyModel Nothing)
+        Just (Route.Post id) ->
+            let
+                posts =
+                    List.filter (\t -> t.id == id) Data.Blog.blogs
+            in
+            if List.length posts == 0 then
+                Error ("No post found with id: " ++ id)
+            else
+                Blog (Blog.emptyModel posts)
 
         Just Route.About ->
             About About.emptyModel

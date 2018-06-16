@@ -7,11 +7,14 @@ import Element.Background as Background
 import Element.Border as Border
 import Element.Font as Font
 import Element.Input as Input
+import Time as Time
+import Html.Attributes exposing (style)
+import Markdown
 
 
 subscriptions : Sub Msg
 subscriptions =
-    Sub.none
+    Time.every Time.second Tick
 
 
 init : Cmd Msg
@@ -19,8 +22,19 @@ init =
     Cmd.none
 
 
+type Video
+    = Video1
+    | Video2
+    | Video3
+    | Video4
+
+
 type alias Model =
     { searchText : String
+    , videoStarted : Bool
+    , video : Video
+    , time : Time.Time
+    , counter : Int
     }
 
 
@@ -28,8 +42,18 @@ view : Model -> Element Msg
 view model =
     column [] <|
         [ row [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 } ]
-            [ el [ centerX ]
-                (image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2015/11/3.jpg", description = "American Craft Spirits" })
+            [ paragraph []
+                [ html
+                    (Markdown.toHtml
+                        [ style [ ( "width", "680px" ) ]
+                        ]
+                        (showVideo
+                            model.video
+                        )
+                    )
+                ]
+
+            --image [] { src = "http://www.americancraftspirits.com/wp-content/uploads/2015/11/3.jpg", description = "American Craft Spirits" })
             ]
 
         {-
@@ -206,6 +230,46 @@ view model =
                ]
 
 
+updateCounter : Model -> Model
+updateCounter model =
+    if model.counter < 10 then
+        { model | counter = model.counter + 1 }
+    else
+        { model | counter = 0, video = toggleVideo model.video }
+
+
+toggleVideo : Video -> Video
+toggleVideo video =
+    case video of
+        Video1 ->
+            Video2
+
+        Video2 ->
+            Video3
+
+        Video3 ->
+            Video4
+
+        Video4 ->
+            Video1
+
+
+showVideo : Video -> String
+showVideo video =
+    case video of
+        Video1 ->
+            "Something 1"
+
+        Video2 ->
+            """<iframe src="https://www.youtube.com/embed/XT8cn6R5uaE?rel=0" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen"></iframe>"""
+
+        Video3 ->
+            "Something 3"
+
+        Video4 ->
+            "Something 4"
+
+
 type alias ImageTextTextRow =
     { src : String
     , description : String
@@ -277,15 +341,16 @@ imageTextTextRow ( itt1, itt2, itt3 ) =
                     [ text itt.textDescription ]
                 ]
     in
-    row [ spacing 40 ]
-        [ imageTextTextRowHelper itt1
-        , imageTextTextRowHelper itt2
-        , imageTextTextRowHelper itt3
-        ]
+        row [ spacing 40 ]
+            [ imageTextTextRowHelper itt1
+            , imageTextTextRowHelper itt2
+            , imageTextTextRowHelper itt3
+            ]
 
 
 type Msg
     = ClickMsg
+    | Tick Time.Time
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -294,8 +359,15 @@ update msg model =
         ClickMsg ->
             ( model, Cmd.none )
 
+        Tick time ->
+            ( updateCounter model, Cmd.none )
+
 
 emptyModel : Model
 emptyModel =
     { searchText = ""
+    , videoStarted = False
+    , video = Video1
+    , time = 0
+    , counter = 0
     }

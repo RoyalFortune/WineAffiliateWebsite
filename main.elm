@@ -31,7 +31,7 @@ init location =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    Sub.map HomeMsg Home.subscriptions
 
 
 navbar : Model -> List (Element Msg)
@@ -40,16 +40,16 @@ navbar model =
         routeLink route =
             Route.routeLink (Route.parse model.location) OpenPage route
     in
-    [ routeLink Route.Home
-    , routeLink Route.Blog
-    , routeLink Route.About
-    , el [] (text "Tasting Room")
-    , el [] (text "Wine Store")
-    , el [] (text "Faqs")
-    , el [] (text "Contact")
-    , el [] (icon "fa fa-shopping-cart")
-    , el [] (icon "fa fa-search")
-    ]
+        [ routeLink Route.Home
+        , routeLink Route.Blog
+        , routeLink Route.About
+        , el [] (text "Tasting Room")
+        , el [] (text "Wine Store")
+        , el [] (text "Faqs")
+        , el [] (text "Contact")
+        , el [] (icon "fa fa-shopping-cart")
+        , el [] (icon "fa fa-search")
+        ]
 
 
 type Page
@@ -170,10 +170,10 @@ getPage maybeRoute =
                 posts =
                     List.filter (\t -> t.id == id) Data.Blog.blogs
             in
-            if List.length posts == 0 then
-                Error ("No post found with id: " ++ id)
-            else
-                Blog (Blog.emptyModel posts)
+                if List.length posts == 0 then
+                    Error ("No post found with id: " ++ id)
+                else
+                    Blog (Blog.emptyModel posts)
 
         Just Route.About ->
             About About.emptyModel
@@ -190,33 +190,33 @@ updatePage page msg model =
                 ( newModel, newCmd ) =
                     subUpdate subMsg subModel
             in
-            { model | page = toModel newModel } ! [ Cmd.map toMsg newCmd ]
+                { model | page = toModel newModel } ! [ Cmd.map toMsg newCmd ]
     in
-    case ( msg, page ) of
-        ( UrlChange location, _ ) ->
-            ( { model
-                | page = getPage (Route.parse location)
-                , location = location
-              }
-            , Cmd.none
-            )
+        case ( msg, page ) of
+            ( UrlChange location, _ ) ->
+                ( { model
+                    | page = getPage (Route.parse location)
+                    , location = location
+                  }
+                , Cmd.none
+                )
 
-        ( OpenPage route, _ ) ->
-            ( { model | page = getPage (Just route) }
-            , Navigation.newUrl (Route.getUrl route)
-            )
+            ( OpenPage route, _ ) ->
+                ( { model | page = getPage (Just route) }
+                , Navigation.newUrl (Route.getUrl route)
+                )
 
-        ( BlogMsg subMsg, Blog subModel ) ->
-            toPage Blog BlogMsg Blog.update subMsg subModel
+            ( BlogMsg subMsg, Blog subModel ) ->
+                toPage Blog BlogMsg Blog.update subMsg subModel
 
-        ( HomeMsg subMsg, Home subModel ) ->
-            toPage Home HomeMsg Home.update subMsg subModel
+            ( HomeMsg subMsg, Home subModel ) ->
+                toPage Home HomeMsg Home.update subMsg subModel
 
-        ( AboutMsg subMsg, About subModel ) ->
-            toPage About AboutMsg About.update subMsg subModel
+            ( AboutMsg subMsg, About subModel ) ->
+                toPage About AboutMsg About.update subMsg subModel
 
-        _ ->
-            ( model, Cmd.none )
+            _ ->
+                ( model, Cmd.none )
 
 
 main : Program Never Model Msg

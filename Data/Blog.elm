@@ -141,7 +141,7 @@ Make it a point to buy and taste at least one bottle of fine wine and don’t ju
 
 
 
-Visit us at American Craft Spirits – http://www.americancraftspirits.com to learn more and claim your favorite wines in our cellar! Catch our regular Facebook posts at – https://www.facebook.com/americancraftspirits/
+Visit us at American Craft Spirits – [http://www.americancraftspirits.com/] to learn more and claim your favorite wines in our cellar! Catch our regular Facebook posts at – [https://www.facebook.com/americancraftspirits/]
 
 
 
@@ -167,6 +167,8 @@ If food is the body of good living, wine is its soul.” — Clifton Fadiman\x20
 [Syrah (Shiraz)]: https://www.cawineclub.com/White-Wines-Viognier_CAV2_35.html
 [Viognier]: https://www.cawineclub.com/White-Wines-Viognier_CAV2_35.html
 [Zinfandel]: https://www.cawineclub.com/Red-Wines-Zinfandel_CAV1_26.html
+[http://www.americancraftspirits.com/]: http://www.americancraftspirits.com/
+[https://www.facebook.com/americancraftspirits/]: https://www.facebook.com/americancraftspirits/
 
                   """
       }

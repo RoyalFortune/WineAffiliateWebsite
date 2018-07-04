@@ -1,9 +1,33 @@
-module Data.Blog exposing (..)
+module Data.Data exposing (..)
+
+-- Product Info
+--  Affiliate Link
+--  Product Title
+--  Product SubTitle
+--  Price
+--  Description
+--  Comments/Reviews
+--  Tags?
+--  Categories?
+-- Comments/Reviews
+--  UserGuid
+--  User Name
+--  Verified Purchase?
+--  Comment/Review Text
+--  Rating
+-- Dictionary
+--  No clue yet
+
+
+type alias Products =
+    { url : ProductUrl
+    , title : String
+    }
 
 
 type alias Data =
     { posts : List Post
-    , comments : LIst Comment
+    , comments : List Comment
     }
 
 
@@ -34,6 +58,10 @@ type Url
     = FreeUrl String
 
 
+type ProductUrl
+    = AffiliateUrl String
+
+
 
 --| PaidUrl String Token
 
@@ -53,17 +81,6 @@ type alias Cooking =
     , categories : List String
     , comments : List Comment
     , content : String
-    }
-
-
-type alias Author =
-    { name : String
-    , url : String
-    }
-
-
-type alias Comment =
-    { message : String
     }
 
 

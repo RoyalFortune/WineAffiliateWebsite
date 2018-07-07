@@ -21,6 +21,7 @@ type Route
     | Blog
     | Post String
     | About
+    | Faq
 
 
 route : Url.Parser (Route -> a) a
@@ -30,6 +31,7 @@ route =
         , Url.map Blog (s "blog")
         , Url.map Post (s "blog" </> string)
         , Url.map About (s "about")
+        , Url.map Faq (s "faq")
         ]
 
 
@@ -63,6 +65,9 @@ routeLink currentRoute openPage route =
             About ->
                 text "About"
 
+            Faq ->
+                text "Faq"
+
 
 getUrl : Route -> String
 getUrl route =
@@ -78,6 +83,9 @@ getUrl route =
 
         About ->
             "../about"
+
+        Faq ->
+            "../faq"
 
 
 parse : Navigation.Location -> Maybe Route

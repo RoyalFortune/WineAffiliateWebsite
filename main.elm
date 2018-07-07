@@ -1,7 +1,7 @@
 module Main exposing (..)
 
-import About exposing (Model, emptyModel, init, subscriptions, update, view)
-import Blog exposing (Model, emptyModel, init, subscriptions, update, view)
+import Pages.About as About exposing (Model, emptyModel, init, subscriptions, update, view)
+import Pages.Blog as Blog exposing (Model, emptyModel, init, subscriptions, update, view)
 import Color exposing (..)
 import Common.Html exposing (desktopWidth, icon, paddingRight15)
 import Common.Route as Route exposing (Route)
@@ -9,7 +9,8 @@ import Data.Blog
 import Element exposing (..)
 import Element.Background as Background
 import Element.Font as Font
-import Home exposing (Model, emptyModel, init, subscriptions, update, view)
+import Pages.Home as Home exposing (Model, emptyModel, init, subscriptions, update, view)
+import Pages.Faq as Faq exposing (Model, emptyModel, init, subscriptions, update, view)
 import Html exposing (Html)
 import Navigation
 
@@ -45,7 +46,7 @@ navbar model =
         , routeLink Route.About
         , el [] (text "Tasting Room")
         , el [] (text "Wine Store")
-        , el [] (text "Faqs")
+        , routeLink Route.Faq
         , el [] (text "Contact")
         , el [] (icon "fa fa-shopping-cart")
         , el [] (icon "fa fa-search")
@@ -56,6 +57,7 @@ type Page
     = Home Home.Model
     | Blog Blog.Model
     | About About.Model
+    | Faq Faq.Model
     | Error String
 
 
@@ -139,6 +141,9 @@ viewPage page =
         About subModel ->
             Element.map AboutMsg (About.view subModel)
 
+        Faq subModel ->
+            Element.map FaqMsg (Faq.view subModel)
+
         Error errorStr ->
             text errorStr
 
@@ -149,6 +154,7 @@ type Msg
     | HomeMsg Home.Msg
     | BlogMsg Blog.Msg
     | AboutMsg About.Msg
+    | FaqMsg Faq.Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -177,6 +183,9 @@ getPage maybeRoute =
 
         Just Route.About ->
             About About.emptyModel
+
+        Just Route.Faq ->
+            Faq Faq.emptyModel
 
         Nothing ->
             Error "Unkown Page"

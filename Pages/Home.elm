@@ -1,4 +1,4 @@
-module Home exposing (Model, Msg, emptyModel, init, subscriptions, update, view)
+module Pages.Home exposing (Model, Msg, emptyModel, init, subscriptions, update, view)
 
 import Color exposing (..)
 import Common.Html exposing (icon, paddingBottom20)

@@ -1,4 +1,4 @@
-module About exposing (Model, Msg, emptyModel, init, subscriptions, update, view)
+module Pages.About exposing (Model, Msg, emptyModel, init, subscriptions, update, view)
 
 import Color exposing (..)
 import Common.Html exposing (desktopWidth, followUsColumn, icon, spacer)

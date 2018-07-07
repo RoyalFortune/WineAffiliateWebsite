@@ -1,4 +1,4 @@
-module Blog exposing (Model, Msg, emptyModel, init, subscriptions, update, view)
+module Pages.Blog exposing (Model, Msg, emptyModel, init, subscriptions, update, view)
 
 import Color
 import Common.Html exposing (desktopWidth, followUsColumn, icon, spacer)
@@ -63,28 +63,28 @@ viewBlog { id, imageSrc, headerText, date, author, categories, comments } =
         postUrl =
             Route.getUrl (Route.Post id)
     in
-    column [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 }, spacing 10 ]
-        [ link []
-            { url = postUrl
-            , label =
-                image [ width (px 680), height (px 514) ]
-                    { src = imageSrc, description = headerText }
-            }
-        , link [ Font.size 24 ] { url = postUrl, label = text headerText }
-        , row [ spacing 8 ]
-            [ icon "fa fa-clock-o"
-            , el [] (text date)
-            , spacer 20
-            , icon "fa fa-user"
-            , link [] { url = author.url, label = text author.name }
-            , spacer 20
-            , icon "fa fa-folder-o"
-            , el [] (text (String.join ", " categories))
-            , spacer 20
-            , icon "fa fa-comment-o"
-            , text (toString (List.length comments) ++ " Comments")
+        column [ paddingEach { bottom = 30, left = 0, right = 0, top = 30 }, spacing 10 ]
+            [ link []
+                { url = postUrl
+                , label =
+                    image [ width (px 680), height (px 514) ]
+                        { src = imageSrc, description = headerText }
+                }
+            , link [ Font.size 24 ] { url = postUrl, label = text headerText }
+            , row [ spacing 8 ]
+                [ icon "fa fa-clock-o"
+                , el [] (text date)
+                , spacer 20
+                , icon "fa fa-user"
+                , link [] { url = author.url, label = text author.name }
+                , spacer 20
+                , icon "fa fa-folder-o"
+                , el [] (text (String.join ", " categories))
+                , spacer 20
+                , icon "fa fa-comment-o"
+                , text (toString (List.length comments) ++ " Comments")
+                ]
             ]
-        ]
 
 
 viewBlogAndLink : Post -> Element msg
@@ -93,21 +93,21 @@ viewBlogAndLink post =
         postUrl =
             Route.getUrl (Route.Post post.id)
     in
-    column []
-        [ viewBlog post
-        , link []
-            { url = postUrl
-            , label =
-                el
-                    [ Background.color (Color.rgb 74 151 194)
-                    , Font.color Color.white
-                    , Font.size 12
-                    , paddingEach { left = 12, right = 12, top = 10, bottom = 10 }
-                    , Border.rounded 3
-                    ]
-                    (text "Read More")
-            }
-        ]
+        column []
+            [ viewBlog post
+            , link []
+                { url = postUrl
+                , label =
+                    el
+                        [ Background.color (Color.rgb 74 151 194)
+                        , Font.color Color.white
+                        , Font.size 12
+                        , paddingEach { left = 12, right = 12, top = 10, bottom = 10 }
+                        , Border.rounded 3
+                        ]
+                        (text "Read More")
+                }
+            ]
 
 
 type Msg
